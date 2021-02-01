@@ -11,7 +11,7 @@ const createServer = (): Application => {
   app.use(helmet());
   app.use(cors());
   app.use((req, res, next) => {
-    return bodyParser.json()(req, res, err => {
+    return bodyParser.json()(req, res, (err) => {
       if (err) {
         return res.status(400).send({
           message: 'Invalid JSON payload passed.',

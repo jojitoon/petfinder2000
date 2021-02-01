@@ -1,103 +1,102 @@
-# TSDX User Guide
+# Pet Finder 2000
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+Features
+The following features should be developed in order for the application to be usable by
+visitors.
+Terminology:
+- User: An authenticated visitor.
+- Guest: An unauthenticated visitor.
+Users are allowed to do what guests can do.
+As a guest I want to be able to register
+Visitors are only allowed to place an advertisement when they have registered as a user.
 
-> This TSDX setup is meant for developing libraries (not apps!) that can be published to NPM. If you’re looking to build a Node app, you could use `ts-node-dev`, plain `ts-node`, or simple `tsc`.
+A user should contain the following information:
+- Name
+- Email
+- Password
 
-> If you’re new to TypeScript, checkout [this handy cheatsheet](https://devhints.io/typescript)
 
-## Commands
+As a guest I want to login
 
-TSDX scaffolds your new library inside `/src`.
+Some features are not available to visitors. Therefore visitors that have registered should be
+able to login.
 
-To run TSDX, use:
 
-```bash
-npm start # or yarn start
-```
+As a guest I want to be able to reset my password
 
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
+Sometimes the visitors are forgetful and can’t seem to remember their password. Password
+reset feature should help them to gain access to their account.
 
-To do a one-off build, use `npm run build` or `yarn build`.
 
-To run tests, use `npm test` or `yarn test`.
+As a user I want to be able to place an advertisement for my missing pet
 
-## Configuration
+In order for visitors to help each other they have to be able to place advertisements with
+information about their pets.
 
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
+An advertisement should contain the following information:
+- Title
+- Image of pet
+- Type of pet
+- Description
 
-### Jest
 
-Jest tests are set up to run with `npm test` or `yarn test`.
+As a guest I want to be able to view advertisements
+In order for other visitors to help finding pets they should be able to view the advertisements
+in an overview. They should also be able to search on title and pet type, and should be able
+to sort on creation date.
 
-### Bundle Analysis
 
-[`size-limit`](https://github.com/ai/size-limit) is set up to calculate the real cost of your library with `npm run size` and visualize the bundle with `npm run analyze`.
+As a guest I want to be able to view an advertisement in more detail
 
-#### Setup Files
+A visitor might have spotted the missing pet, but is not sure and wants to see the
+advertisement in more detail.
 
-This is the folder structure we set up for you:
 
-```txt
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
-```
+As a guest I want to be able to comment on an advertisement
 
-### Rollup
+Other visitors of the website should be able to let the author know if they have seen or
+maybe even found the missing pet.
 
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
+A comment should contain the following information:
+- Location
+- Content
 
-### TypeScript
 
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
+As a user I want to be able to mark my advertisement as “found”
 
-## Continuous Integration
+Hopefully the user will find the missing pet as soon as possible. When this happens the user
+should be able to mark the advertisement as “found”.
+Advertisements that have been marked as “found” should not be visible on the
+overview after one day
+It is always good to hear when a pet is found and is feeling well. Visitors of the website
+should be able to know when a pet has been found before they dedicate their lives on finding
+a pet.
 
-### GitHub Actions
 
-Two actions are added by default:
+As a user I want to be able to change my advertisement
 
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [`size-limit`](https://github.com/ai/size-limit)
+Maybe users have some extra information to share, or have a better image that shows their
+lovely dog named Cooper in its best doggy outfit.
 
-## Optimizations
+As a user I want to be able to remove my advertisement
 
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
+Sometimes users are ashamed that they have lost their goldfish for the tenth time and
+change their mind on placing the advertisement.
 
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
 
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
-}
-```
+As a guest I want to be able to remove my comment
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+Visitors might have accidentally placed a comment on the wrong advertisement and should
+be able to correct their mistake.
 
-## Module Formats
 
-CJS, ESModules, and UMD module formats are supported.
+As an author of an advertisement I want to be able to remove a comment
+Misinformation can lead to catastrophic results. The user that has created the advertisement
+should be able to manage the information others share on its advertisement.
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
 
-## Named Exports
+As an author of an advertisement I want to receive an email when someone
+commented on my advertisement
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
-
-## Including Styles
-
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
-
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
-
-## Publishing to NPM
-
-We recommend using [np](https://github.com/sindresorhus/np).
+To be able to find their pets as fast as possible, users should know when someone has left
+information on their advertisement.
