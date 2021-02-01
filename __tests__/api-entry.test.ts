@@ -14,15 +14,8 @@ const mockResult = {
 };
 
 describe('api entry point', () => {
-  it('/ returns proper values', async () => {
-    const result = await request(server).get('/');
+  it('/apireturns proper values', async () => {
+    const result = await request(server).get('/api');
     expect(result.body).toEqual(mockResult);
-  });
-  it('* returns proper error', async () => {
-    const result = await request(server).get('/wrong');
-    expect(result.body).toEqual({
-      message: 'route not found',
-      status: 'error',
-    });
   });
 });
