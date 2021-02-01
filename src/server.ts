@@ -3,28 +3,12 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import mongoose from 'mongoose';
-import logger from './helpers/logger';
 import routes from './routes';
+import path from 'path';
 
 const createServer = (): Application => {
-  // ===== DB Connection =============//
-  const dbUri = process.env.DB_URI || '';
-
-  mongoose.connect(dbUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  });
-  const db = mongoose.connection;
-  db.on('error', (error) => logger.error('MongoDB connection error:', error));
-  db.once('open', function () {
-    logger.info('MongoDB database connection established successfully');
-  });
-
-  // ==========END db connection===============//
-
   const app = express();
+  app.use(express.static(path.join(__dirname, '..', 'client/build')));
 
   // ======= Middlewares ======= //
   app.use(morgan('dev'));
@@ -46,7 +30,7 @@ const createServer = (): Application => {
   // ==========END middlewares ===============//
 
   // ======= Routes Inits ======= //
-  app.get('/', (_, res) => {
+  app.get('/api', (_, res) => {
     res.status(200).send({
       message: 'Pet Finder 2000 API',
       status: 'success',
@@ -55,12 +39,9 @@ const createServer = (): Application => {
 
   app.use('/api', routes);
 
-  app.use('*', (req, res) =>
-    res.status(404).send({
-      message: 'route not found',
-      status: 'error',
-    })
-  );
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
 
   // ==========END routes===============//
 

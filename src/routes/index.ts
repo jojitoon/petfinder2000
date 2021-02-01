@@ -1,7 +1,6 @@
-import { Router, Request, Response, NextFunction } from 'express';
+import { Router } from 'express';
 import { loginUser, signUpUser } from '../controller/users';
 import isAuth from '../middlewares/isAuth';
-import { ExtraRequest } from '../types';
 import {
   signupValidator,
   loginValidator,
@@ -19,11 +18,9 @@ const router = Router();
 
 // User Auth
 router.post('/login', loginValidator, resolveValidations, loginUser);
-
 router.post('/signup', signupValidator, resolveValidations, signUpUser);
 
 // advertisement
-
 router.get('/advertisement', injectReq(allAdvertisement));
 router.get('/advertisement/:id', injectReq(oneAdvertisement));
 router.post(

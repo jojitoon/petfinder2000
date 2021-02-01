@@ -12,10 +12,12 @@
   },
   "scripts": {
     "start": "node dist/index.js",
+    "postinstall": "yarn --cwd client install",
     "dev:client": "yarn --cwd client start",
     "dev:api": "nodemon",
     "dev": "concurrently \"yarn dev:api\" \"yarn dev:client\"",
     "build": "rimraf ./dist && tsc",
+    "postbuild": "yarn --cwd client build",
     "lint": "eslint . --ext .ts --fix",
     "prettier-format": "run-script-os",
     "prettier-format:win32": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
@@ -25,7 +27,7 @@
     "prettier-watch:win32": "onchange \"src/**/*.ts\" -- prettier --write {{changed}}",
     "prettier-watch:darwin:linux": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
     "prettier-watch:default": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
-    "test": "jest && yarn --cwd client test --no-watch",
+    "test": "jest",
     "test:dev": "concurrently \"jest --watchAll\" \"yarn --cwd client test\""
   },
   "peerDependencies": {},
